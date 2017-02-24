@@ -1,12 +1,15 @@
+// +build appengine
+
 package employees
 
 import (
-	"context"
 	"net/http"
 	"time"
 
+	"golang.org/x/net/context"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
+	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/user"
 )
 
@@ -51,10 +54,14 @@ func (a *AppEngineStore) Get(ctx context.Context, id string) (*Employee, error) 
 }
 
 func (a *AppEngineStore) Put(ctx context.Context, e Employee) (string, error) {
-	e.Account = user.Current(ctx).String()
+	u := user.Current(ctx)
+	if u != nil {
+		e.Account = u.String()
+	}
 	e.HireDate = time.Now()
 	key, err := datastore.Put(ctx, datastore.NewIncompleteKey(ctx, collectionName, nil), &e)
 	if err != nil {
+		log.Errorf(ctx, "could not put into datastore: %v", err)
 		return "", err
 	}
 	return key.Encode(), nil
