@@ -50,6 +50,7 @@ func (a *AppEngineStore) Get(ctx context.Context, id string) (*Employee, error) 
 	if err != nil {
 		return nil, err
 	}
+	e.Id = id
 	return &e, nil
 }
 
