@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/StefanKjartansson/gcp-workshop/appengine"
+	"github.com/StefanKjartansson/gcp-workshop-appengine-employeestore"
 )
 
 func main() {
