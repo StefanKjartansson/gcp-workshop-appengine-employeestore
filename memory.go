@@ -3,11 +3,12 @@
 package employees
 
 import (
-	"context"
 	"errors"
 	"math/rand"
 	"net/http"
 	"time"
+
+	"golang.org/x/net/context"
 )
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
